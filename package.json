@@ -1,0 +1,75 @@
+{
+  "name": "dsh-plugin-updates",
+  "version": "0.1.0",
+  "description": "DeepSeek Harness (DSH) plugin: a notify-only update checker for the plugins in your profile. Classifies every dependency by its specifier (registry, github, release tarball, link), checks only registry.npmjs.org and api.github.com, applies the DSH compatibility gate against the running core, and never installs anything.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "docs",
+    "skills",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "for f in lib/*.js; do case $f in lib/client.js) ;; *) node --check $f || exit 1;; esac; done && node --check lib/client.js",
+    "test": "node --test test/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=22.5",
+    "dsh": ">=0.1.5-rc.1 <0.3.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    }
+  },
+  "dependencies": {
+    "semver": "^7.6.0"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "jsdom": "^30.0.1",
+    "react": "^18.2.0",
+    "react-dom": "18.3.1"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "updates",
+    "outdated",
+    "notifier",
+    "dsh-better-sidebar"
+  ],
+  "author": {
+    "name": "Luca Tzekos",
+    "url": "https://jobopportunitiesapi.org"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucagiftzek/dsh-plugin-updates.git"
+  },
+  "homepage": "https://github.com/lucagiftzek/dsh-plugin-updates#readme",
+  "bugs": {
+    "url": "https://github.com/lucagiftzek/dsh-plugin-updates/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,16 @@
+# dsh-plugin-updates bundle patch.
+#
+# Inserts one HOST row so the composition mounts the package: the node half
+# (exports ".") holds the checker, routes and the plugin_updates tool; the
+# browser half (lib/client.js, declared via package.json `dsh.client`) adds the
+# Updates sidebar tab with a live badge and the Settings section.
+#
+# KILL SWITCH (no uninstall needed): add to the profile cordis.patch.yml
+#     - id: plugin-updates
+#       disabled: true
+# or set DSH_PLUGIN_UPDATES_DISABLE=1 in the environment of `dsh web`.
+# To change settings on DSH 0.2.x, override with a plain `- id: plugin-updates`
+# row with a `config:` block, never a second `insert` row.
+- insert:
+    - id: plugin-updates
+      name: 'dsh-plugin-updates'
