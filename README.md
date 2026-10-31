@@ -56,7 +56,7 @@ Settings live in the `dsh-plugin-updates` namespace on DSH 0.1.5 (Settings page,
 | `channels` | `["latest"]` | Extra dist-tags to show (for example `next`). Never counted in the badge. |
 | `holds` | seeded | Package name to a semver range to avoid. A value may end in `when dsh <range>` to apply only on some cores, for example `">=0.3.2 when dsh <0.2.0-0"`. |
 | `upstream` | seeded | Local plugin (folder or package name) to `owner/repo`, or `owner/repo@<base>` to record the base version. Used for `link:` and `file:` plugins that are forks or clones. |
-| `notes` | seeded | Per package notes shown next to the result. |
+| `notes` | seeded | Per package notes shown next to the result. A note ending in ` when dsh <range>` (the hold syntax) is shown only while the running DSH matches that range. |
 | `afterInstall` | `{}` | Per package reminder printed with the apply command (for example a patch script to re-run). |
 | `checkOwnRemotes` | `false` | Compare plain local plugins with their github.com origin. |
 | `snoozeDays` | `7` | Default snooze length. |

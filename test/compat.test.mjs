@@ -117,3 +117,12 @@ test('reduceMeta keeps only the gate fields', () => {
   const m = reduceMeta({ engines: { dsh: '>=1', node: '>=20' }, peerDependencies: { react: '18', '@deepseek-ai/dsh-tools': '^1' }, deprecated: 'x', description: 'long text' })
   assert.deepEqual(m, { e: '>=1', p: { '@deepseek-ai/dsh-tools': '^1' }, d: 1 })
 })
+
+test('noteFor: plain notes always, "when dsh <range>" notes only on matching cores (or an unknown core)', async () => {
+  const { noteFor } = await import('../lib/compat.js')
+  assert.equal(noteFor(sv, '0.2.1-rc.5', 'plain text'), 'plain text')
+  assert.equal(noteFor(sv, '0.1.5-rc.1', 'pin it when dsh <0.2.0-0'), 'pin it')
+  assert.equal(noteFor(sv, '0.2.1-rc.5', 'pin it when dsh <0.2.0-0'), '')
+  assert.equal(noteFor(sv, '', 'pin it when dsh <0.2.0-0'), 'pin it')
+  assert.equal(noteFor(sv, '0.2.1-rc.5', ''), '')
+})

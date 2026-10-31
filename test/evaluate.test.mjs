@@ -244,3 +244,46 @@ test('state file never contains a token, a home path or the profile directory', 
   assert.ok(!text.includes(w.profile))
   assert.ok(!/ghp_|Bearer/.test(text))
 })
+
+// ── DSH 0.2.x host (window A2 review, 31 Oct 2026) ──
+test('seeded notes tied to a 0.1.x core are shown on 0.1.5 and hidden on 0.2.1; unconditional notes stay', async () => {
+  const old = await world().engine.sweep()
+  assert.match(by(old, '@perrylink/dsh-github').note, /Pin the version exactly/)
+  assert.match(by(old, 'dsh-better-sidebar').note, /stepping stones/)
+  assert.doesNotMatch(by(old, '@perrylink/dsh-github').note, /when dsh/, 'the condition suffix is never shown')
+  const now = await world({ running: '0.2.1-rc.5' }).engine.sweep()
+  assert.equal(by(now, '@perrylink/dsh-github').note, undefined)
+  assert.equal(by(now, 'dsh-better-sidebar').note, undefined)
+  assert.match(by(now, 'dsh-session-pin').note, /archived/)
+})
+
+function miniWorld(running, docs, installed) {
+  const routes = Object.entries(docs).map(([n, doc]) => [new RegExp('^https://registry\\.npmjs\\.org/' + n.replace('/', '%2F') + '$'), () => json(doc)])
+  const f = fakeFetch(routes)
+  const profile = makeProfile({ deps: Object.fromEntries(Object.keys(installed).map((n) => [n, installed[n]])), bundles: Object.keys(installed), installed })
+  const s = setup({ fetch: f, settings: { holds: {}, notes: {}, upstream: {} } })
+  return createEngine({ getCfg: s.cfg, state: s.state, net: s.net, sv, profileDir: () => profile, running: () => ({ version: running, source: 'test' }), profileName: () => 'web' })
+}
+const regDoc = (name, latest, versions) => ({ name, 'dist-tags': { latest }, versions: Object.fromEntries(Object.entries(versions).map(([v, e]) => [v, { name, version: v, engines: e ? { dsh: e } : undefined }])) })
+
+test('an update that pins an OLDER core does not promise to become applicable after a core update', async () => {
+  const engine = miniWorld('0.2.1-rc.5', { 'old-pin': regDoc('old-pin', '0.2.3', { '0.2.0': '>=0.1.0', '0.2.3': '0.1.5-rc.1' }) }, { 'old-pin': '0.2.0' })
+  const r = by(await engine.sweep(), 'old-pin')
+  assert.equal(r.status, 'update-needs-older-core')
+  assert.match(r.manualHint, /older DSH than the running one/)
+  assert.doesNotMatch(r.manualHint, /becomes applicable after the core is updated/)
+})
+
+test('an update that needs a NEWER core keeps the "after the core is updated" hint', async () => {
+  const engine = miniWorld('0.1.5-rc.1', { 'new-pin': regDoc('new-pin', '0.3.0', { '0.2.0': '>=0.1.0', '0.3.0': '>=0.2.1-0' }) }, { 'new-pin': '0.2.0' })
+  const r = by(await engine.sweep(), 'new-pin')
+  assert.equal(r.status, 'update-needs-newer-core')
+  assert.match(r.manualHint, /after the core is updated/)
+})
+
+test('a "latest compatible" older than the installed version is not reported (installed runs through a core grant)', async () => {
+  const engine = miniWorld('0.2.1-rc.5', { granted: regDoc('granted', '0.1.32', { '0.1.31': '>=0.1.0', '0.1.32': '0.1.5-rc.1' }) }, { granted: '0.1.32' })
+  const r = by(await engine.sweep(), 'granted')
+  assert.equal(r.latestCompatible, '')
+  assert.equal(r.status, 'up-to-date')
+})
