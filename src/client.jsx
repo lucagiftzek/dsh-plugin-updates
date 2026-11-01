@@ -90,7 +90,7 @@ function ago(ms) {
 }
 
 const CSS = `
-.plu{--ink:var(--dsw-alias-label-primary,inherit);--ink2:var(--dsw-alias-label-secondary,inherit);--line:var(--dsw-alias-border-l2,rgba(128,128,128,.28));--brand:var(--dsw-alias-brand-primary,#4d6bfe);--bad:var(--dsw-alias-state-error-primary,#cf3b3b);--bg:var(--dsw-alias-bg-base,var(--dsw-alias-bg-layer-1,#fff));
+.plu{--ink:var(--dsw-alias-label-primary,inherit);--ink2:var(--dsw-alias-label-secondary,inherit);--line:var(--dsw-alias-border-l2,rgba(128,128,128,.28));--brand:var(--dsw-alias-brand-primary,#4d6bfe);--on-brand:var(--dsw-alias-label-primary-foreground,#fff);--bad:var(--dsw-alias-state-error-primary,#cf3b3b);--bg:var(--dsw-alias-bg-base,var(--dsw-alias-bg-layer-1,#fff));
  display:flex;flex-direction:column;height:100%;min-height:0;font:13px/1.45 system-ui,sans-serif;color:var(--ink)}
 .plu *{box-sizing:border-box}
 .plu-head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 12px;border-bottom:1px solid var(--line)}
@@ -105,7 +105,7 @@ const CSS = `
 .plu .chip.good{border-color:#2f9e5b;color:#2f9e5b}.plu .chip.warn{border-color:#c28a1e;color:#c28a1e}.plu .chip.bad{border-color:var(--bad);color:var(--bad)}.plu .chip.info{border-color:var(--brand);color:var(--brand)}
 .plu button,.plu a.btn{font:inherit;font-size:12px;padding:3px 8px;border:1px solid var(--line);border-radius:6px;background:transparent;color:var(--ink);cursor:pointer;text-decoration:none;display:inline-block;margin:0 4px 4px 0}
 .plu button:hover,.plu a.btn:hover{border-color:var(--brand)}
-.plu button.pri{background:var(--brand);border-color:var(--brand);color:#fff}
+.plu button.pri{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
 .plu button:disabled{opacity:.5;cursor:default}
 .plu pre{margin:4px 0 0;padding:6px 8px;border:1px solid var(--line);border-radius:6px;white-space:pre-wrap;word-break:break-all;font-size:11.5px}
 .plu .err{color:var(--bad);padding:8px 12px}

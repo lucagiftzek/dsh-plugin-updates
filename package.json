@@ -1,6 +1,6 @@
 {
   "name": "@lucagiftzek/dsh-plugin-updates",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "DeepSeek Harness (DSH) plugin: a notify-only update checker for the plugins in your profile. Classifies every dependency by its specifier (registry, github, release tarball, link), checks only registry.npmjs.org and api.github.com, applies the DSH compatibility gate against the running core, and never installs anything.",
   "type": "module",
   "main": "lib/index.js",

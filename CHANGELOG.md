@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 (2026-11-02)
+
+- **Fix: white text on a white button in dark mode.** On a stock DSH theme in dark mode the host primary colour is near white, but the Check now button had hard-coded white text. It now uses the host's paired foreground token (`--dsw-alias-label-primary-foreground`, white as the fallback).
+
 ## 0.1.1 (2026-11-01)
 
 First public release.
