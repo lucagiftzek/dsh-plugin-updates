@@ -23,21 +23,12 @@ It also keeps a list of holds (versions you know to avoid), per package notes, a
 
 ## Install (DSH web profile)
 
-The package is linked, not copied. Keep the checkout where it lives.
-
 ```bash
-git clone https://github.com/lucagiftzek/dsh-plugin-updates /path/to/dsh-plugin-updates
-cd /path/to/dsh-plugin-updates && npm install --omit=dev
-
-cd ~/.dsh/profiles/web                      # your DSH web profile
-# 1. add to package.json:
-#      "dependencies": { "dsh-plugin-updates": "link:/path/to/dsh-plugin-updates" }
-#      "dsh": { "profile": { "bundles": [ "dsh-plugin-updates" ] } }   (append to the existing list)
-pnpm install
-# 2. restart dsh web: the server half loads at start only
+dsh plugin --profile web add github:lucagiftzek/dsh-plugin-updates
+# then restart dsh web: the server half loads at start only
 ```
 
-The official installer also works: `dsh plugin --profile web add link:/path/to/dsh-plugin-updates`. Requires Node 22.5 or newer and DSH 0.1.5-rc.1 up to (not including) 0.3.0. The browser half hot-reloads; only the server half needs the restart.
+The package declares `dsh.bundle`, so `dsh plugin add` lists it in `dsh.profile.bundles`. A local checkout works too: clone it, run `npm install --omit=dev` in it, then `dsh plugin --profile web add link:/absolute/path/to/dsh-plugin-updates`. Requires Node 22.5 or newer and DSH 0.1.5-rc.1 up to (not including) 0.3.0. The browser half hot-reloads; only the server half needs the restart.
 
 Kill switch without uninstalling: add `- id: plugin-updates` with `disabled: true` to the profile `cordis.patch.yml`, or set `DSH_PLUGIN_UPDATES_DISABLE=1`.
 

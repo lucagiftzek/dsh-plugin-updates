@@ -1,6 +1,9 @@
 # Changelog
 
-## Unreleased
+## 0.1.1 (2026-11-01)
+
+First public release.
+
 
 - Fix: on DSH 0.2.1 the tools failed with "value is not lossless JSON" (undefined fields such as candidate.ref and retryAfterSec). Tool results are now sanitized at the tool boundary and error bodies are lossless; regression test test/lossless.test.mjs.
 
