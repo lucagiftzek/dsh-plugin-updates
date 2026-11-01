@@ -13,7 +13,7 @@ description: Diagnose and fix dsh-plugin-updates problems step by step (install,
 - Stop and report after a fix; verify with the step given.
 
 ## 0. Facts (read-only)
-1. Plugin dir: `node -p "require('path').dirname(require.resolve('dsh-plugin-updates/package.json', {paths:[(process.env.DSH_HOME||require('os').homedir()+'/.dsh')+'/profiles/web']}))"`
+1. Plugin dir: `node -p "require('path').dirname(require.resolve('@lucagiftzek/dsh-plugin-updates/package.json', {paths:[(process.env.DSH_HOME||require('os').homedir()+'/.dsh')+'/profiles/web']}))"`
 2. Doctor: `curl -s <dsh-url>/dsh-plugin-updates/api/doctor` (or the tool `plugin_updates_doctor`).
 3. Status: `curl -s <dsh-url>/dsh-plugin-updates/api/status` (running version, last check, problems, counts).
 4. One package: `curl -s '<dsh-url>/dsh-plugin-updates/api/detail?pkg=<name>'`.

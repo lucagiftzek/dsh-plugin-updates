@@ -68,7 +68,7 @@ function makeCtx({ sidebar = true, injectKind = 'cb' } = {}) {
 }
 
 test('client declares inject ["slots"] only: better-sidebar stays optional', () => {
-  assert.equal(loaded.id, 'dsh-plugin-updates')
+  assert.equal(loaded.id, '@lucagiftzek/dsh-plugin-updates')
   assert.deepEqual(plugin.inject, ['slots'])
   assert.equal(typeof plugin.apply, 'function')
 })

@@ -20,13 +20,13 @@ import { runInNewContext } from 'node:vm'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const outfile = join(root, 'lib', 'client.js')
-const ID = 'dsh-plugin-updates'
+const ID = '@lucagiftzek/dsh-plugin-updates'
 
 mkdirSync(join(root, 'lib'), { recursive: true })
 
 const banner = [
   'window.__ModuleLoader__.load({',
-  "  id: 'dsh-plugin-updates',",
+  "  id: '@lucagiftzek/dsh-plugin-updates',",
   '  factory: function (require) {',
   '    var module = { exports: {} };',
   '    var exports = module.exports;',

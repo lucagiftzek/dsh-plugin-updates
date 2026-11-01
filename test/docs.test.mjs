@@ -45,7 +45,7 @@ test('doctor skill: valid frontmatter, folder name equals skill name, registered
 test('package.json: files, engines, dsh block, author, license', () => {
   const pkg = JSON.parse(read('package.json'))
   assert.ok(pkg.files.includes('docs') && pkg.files.includes('skills') && pkg.files.includes('lib') && pkg.files.includes('cordis.patch.yml'))
-  assert.equal(pkg.name, 'dsh-plugin-updates')
+  assert.equal(pkg.name, '@lucagiftzek/dsh-plugin-updates')
   assert.equal(pkg.engines.dsh, '>=0.1.5-rc.1 <0.3.0')
   assert.equal(pkg.dsh.bundle.patch, './cordis.patch.yml')
   assert.deepEqual(pkg.author, { name: 'Luca Tzekos', url: 'https://jobopportunitiesapi.org' })

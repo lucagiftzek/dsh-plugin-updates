@@ -1,10 +1,13 @@
 # dsh-plugin-updates
 
+[![npm](https://img.shields.io/npm/v/%40lucagiftzek%2Fdsh-plugin-updates?label=npm)](https://www.npmjs.com/package/@lucagiftzek/dsh-plugin-updates)
+
 An update checker that only offers plugin releases your running DSH core can actually load.
 
 ```bash
 dsh plugin --profile web add dsh-better-sidebar   # the tab host, skip if installed
-dsh plugin --profile web add github:lucagiftzek/dsh-plugin-updates
+dsh plugin --profile web add @lucagiftzek/dsh-plugin-updates
+# or from GitHub: dsh plugin --profile web add github:lucagiftzek/dsh-plugin-updates
 # restart dsh web, then open the Updates tab
 ```
 
@@ -35,8 +38,11 @@ It also keeps a list of holds (versions you know to avoid), per package notes, a
 
 ## Install (DSH web profile)
 
+Install from npm: `dsh plugin --profile web add @lucagiftzek/dsh-plugin-updates`, or from GitHub: `dsh plugin --profile web add github:lucagiftzek/dsh-plugin-updates`.
+
 ```bash
-dsh plugin --profile web add github:lucagiftzek/dsh-plugin-updates
+dsh plugin --profile web add @lucagiftzek/dsh-plugin-updates
+# or from GitHub: dsh plugin --profile web add github:lucagiftzek/dsh-plugin-updates
 # then restart dsh web: the server half loads at start only
 ```
 

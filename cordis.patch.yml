@@ -13,4 +13,4 @@
 # row with a `config:` block, never a second `insert` row.
 - insert:
     - id: plugin-updates
-      name: 'dsh-plugin-updates'
+      name: '@lucagiftzek/dsh-plugin-updates'
