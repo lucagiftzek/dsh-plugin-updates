@@ -17,7 +17,7 @@ dsh plugin --profile web add @lucagiftzek/dsh-plugin-updates
 
 A [DeepSeek Harness](https://www.deepseek.com) (DSH) web-profile plugin that tells you which of your installed plugins have a newer release **that your running DSH can actually take**. It only notifies. It never installs, never edits your profile, never runs a child process.
 
-> **npm name.** The bare name `dsh-plugin-updates` is already taken on npm by an unrelated data package. This repository keeps the folder and package name `dsh-plugin-updates` for local use. If it is published, it will be published as `@jobopportunitiesapi/dsh-plugin-updates`. The loader row id stays `plugin-updates` either way.
+> **npm name.** The bare name `dsh-plugin-updates` is already taken on npm by an unrelated data package, so this plugin is published as `@lucagiftzek/dsh-plugin-updates`. The loader row id stays `plugin-updates` either way.
 
 ## Why
 
